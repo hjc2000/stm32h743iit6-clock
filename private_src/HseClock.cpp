@@ -1,5 +1,33 @@
 #include "HseClock.h"
+#include <base/di/SingletonGetter.h>
+#include <bsp-interface/di/interrupt.h>
 #include <hal.h>
+
+bsp::HseClock &bsp::HseClock::Instance()
+{
+    class Getter :
+        public base::SingletonGetter<HseClock>
+    {
+    public:
+        std::unique_ptr<HseClock> Create() override
+        {
+            return std::unique_ptr<HseClock>{new HseClock{}};
+        }
+
+        void Lock() override
+        {
+            DI_InterruptSwitch().DisableGlobalInterrupt();
+        }
+
+        void Unlock() override
+        {
+            DI_InterruptSwitch().EnableGlobalInterrupt();
+        }
+    };
+
+    Getter g;
+    return g.Instance();
+}
 
 std::string bsp::HseClock::Name() const
 {

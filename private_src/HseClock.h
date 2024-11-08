@@ -1,4 +1,5 @@
 #pragma once
+#include <base/define.h>
 #include <bsp-interface/clock/IClockSource.h>
 
 namespace bsp
@@ -11,6 +12,8 @@ namespace bsp
         IClockSource_State _state{};
 
     public:
+        static_function HseClock &Instance();
+
 #pragma region IClockSource
         /// @brief 本时钟源的名称。
         /// @return
