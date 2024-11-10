@@ -14,10 +14,7 @@ namespace
 
         base::Dictionary<std::string, bsp::IClockSource *> _dic{};
     };
-} // namespace
 
-base::IDictionary<std::string, bsp::IClockSource *> const &DI_ClockSourceCollection()
-{
     class Getter :
         public base::SingletonGetter<Initializer>
     {
@@ -37,7 +34,10 @@ base::IDictionary<std::string, bsp::IClockSource *> const &DI_ClockSourceCollect
             DI_InterruptSwitch().EnableGlobalInterrupt();
         }
     };
+} // namespace
 
+base::IDictionary<std::string, bsp::IClockSource *> const &DI_ClockSourceCollection()
+{
     Getter g;
     return g.Instance()._dic;
 }
