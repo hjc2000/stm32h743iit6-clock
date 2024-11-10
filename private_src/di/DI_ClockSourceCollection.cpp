@@ -9,7 +9,7 @@ namespace
     public:
         Initializer()
         {
-            _dic.Add("hse", &bsp::HseClock::Instance());
+            _dic.Add(bsp::HseClock::Instance().Name(), &bsp::HseClock::Instance());
         }
 
         base::Dictionary<std::string, bsp::IClockSource *> _dic{};
