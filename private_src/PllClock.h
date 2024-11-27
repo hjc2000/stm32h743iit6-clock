@@ -32,8 +32,9 @@ namespace bsp
         /// @return
         IClockSource_State State() const override;
 
-        /// @brief 本时钟源当前频率。
+        /// @brief 查看某一个输出通道的频率。有的时钟源会有多个输出通道。
+        /// @param output_channel_name 输出通道名。
         /// @return
-        base::Hz Frequency() const override;
+        base::Hz Frequency(std::string const &output_channel_name) const override;
     };
 } // namespace bsp

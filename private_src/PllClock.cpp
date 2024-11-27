@@ -18,7 +18,7 @@ bsp::IClockSource_State bsp::PllClock::State() const
     return _state;
 }
 
-base::Hz bsp::PllClock::Frequency() const
+base::Hz bsp::PllClock::Frequency(std::string const &output_channel_name) const
 {
     return base::Hz();
 }
