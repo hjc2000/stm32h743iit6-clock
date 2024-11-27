@@ -56,6 +56,24 @@ void bsp::PllClock::Open(std::string const &input_channel_name, base::IDictionar
             r = *ptr;
         }
     }
+
+    RCC_OscInitTypeDef def{};
+    def.OscillatorType = RCC_OSCILLATORTYPE_NONE;
+    def.PLL.PLLState = RCC_PLL_ON;
+    def.PLL.PLLSource = RCC_PLLSOURCE_HSE;
+    def.PLL.PLLRGE = RCC_PLL1VCIRANGE_2;
+    def.PLL.PLLVCOSEL = RCC_PLL1VCOWIDE;
+    def.PLL.PLLM = m;
+    def.PLL.PLLN = n;
+    def.PLL.PLLP = p;
+    def.PLL.PLLQ = q;
+    def.PLL.PLLR = r;
+
+    HAL_StatusTypeDef result = HAL_RCC_OscConfig(&def);
+    if (result != HAL_StatusTypeDef::HAL_OK)
+    {
+        throw std::runtime_error{"时钟源配置失败"};
+    }
 }
 
 void bsp::PllClock::Close()
