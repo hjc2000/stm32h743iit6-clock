@@ -11,7 +11,11 @@ namespace bsp
         public bsp::IClockSource
     {
     private:
+        bool _opened = false;
         IClockSource_State _state = IClockSource_State::Off;
+        base::Hz _p_freq;
+        base::Hz _q_freq;
+        base::Hz _r_freq;
 
     public:
         static_function PllClock &Instance();
