@@ -1,4 +1,5 @@
 #include "PllClock.h"
+#include <bsp-interface/di/clock.h>
 
 bsp::PllClock &bsp::PllClock::Instance()
 {
@@ -105,11 +106,48 @@ void bsp::PllClock::Open(std::string const &input_channel_name, base::IDictionar
     }
 #pragma endregion
 
+#pragma region pll_range
+    int pll_range = RCC_PLL1VCIRANGE_2;
+    if (input_channel_name == "hse")
+    {
+        base::Hz freq = DI_ClockSourceCollection().Get("hse")->Frequency();
+        base::Fraction fraction_freq = static_cast<base::Fraction>(freq);
+        if (fraction_freq < 2)
+        {
+            pll_range = RCC_PLL1VCIRANGE_0;
+        }
+        else if (fraction_freq >= 2 && fraction_freq < 4)
+        {
+            pll_range = RCC_PLL1VCIRANGE_1;
+        }
+        else if (fraction_freq >= 4 && fraction_freq < 8)
+        {
+            pll_range = RCC_PLL1VCIRANGE_2;
+        }
+        else
+        {
+            pll_range = RCC_PLL1VCIRANGE_3;
+        }
+    }
+    else if (input_channel_name == "hsi")
+    {
+        throw std::invalid_argument{"不支持该输入通道"};
+    }
+    else if (input_channel_name == "csi")
+    {
+        throw std::invalid_argument{"不支持该输入通道"};
+    }
+    else
+    {
+        throw std::invalid_argument{"不支持该输入通道"};
+    }
+#pragma endregion
+
     RCC_OscInitTypeDef def{};
     def.OscillatorType = RCC_OSCILLATORTYPE_NONE;
     def.PLL.PLLState = RCC_PLL_ON;
     def.PLL.PLLSource = pll_source;
-    def.PLL.PLLRGE = RCC_PLL1VCIRANGE_2;
+    def.PLL.PLLRGE = pll_range;
     def.PLL.PLLVCOSEL = RCC_PLL1VCOWIDE;
     def.PLL.PLLM = m;
     def.PLL.PLLN = n;
