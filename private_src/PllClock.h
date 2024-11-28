@@ -14,6 +14,8 @@ namespace bsp
         IClockSource_State _state = IClockSource_State::Off;
 
     public:
+        static_function PllClock &Instance();
+
         /// @brief 本时钟源的名称。
         /// @return
         std::string Name() const override;
