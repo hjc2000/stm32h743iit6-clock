@@ -33,7 +33,7 @@ std::string bsp::PllClock::Name() const
 
 void bsp::PllClock::Open(std::string const &input_channel_name, base::IDictionary<std::string, int> const &factors)
 {
-#pragma region m,n,p,q
+#pragma region m,n,p,q,r
     int m = 1;
 
     {
