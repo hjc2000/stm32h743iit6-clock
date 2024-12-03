@@ -10,6 +10,9 @@ namespace bsp
     class D3Pclk1ClockSignal :
         public bsp::IClockSignal
     {
+    private:
+        uint32_t _division_factor = 1;
+
     public:
         static_function D3Pclk1ClockSignal &Instance();
 

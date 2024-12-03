@@ -33,7 +33,7 @@ std::string bsp::D1Pclk1ClockSignal::Name() const
 
 base::Hz bsp::D1Pclk1ClockSignal::Frequency() const
 {
-    uint32_t value = HAL_RCC_GetPCLK1Freq();
+    uint32_t value = HAL_RCC_GetHCLKFreq() / _division_factor;
     return base::Hz{value};
 }
 
@@ -74,6 +74,9 @@ void bsp::D1Pclk1ClockSignal::Open(bsp::IClockSignal_InputDivisionFactor const &
             throw std::invalid_argument{"不支持此分频"};
         }
     }
+
+    // 通过了上面的 switch 语句不抛出异常后才能更改 _division_factor
+    _division_factor = input_division_factor.Value();
 
     HAL_StatusTypeDef ret = HAL_RCC_ClockConfig(&def,
                                                 FLASH_LATENCY_2);
