@@ -3,6 +3,7 @@
 #include <HclkClockSignal.h>
 #include <Pclk1ClockSignal.h>
 #include <Pclk2ClockSignal.h>
+#include <SysclkClockSignal.h>
 
 namespace
 {
@@ -11,6 +12,7 @@ namespace
     public:
         Initializer()
         {
+            _dic.Add(bsp::SysclkClockSignal::Instance().Name(), &bsp::SysclkClockSignal::Instance());
             _dic.Add(bsp::HclkClockSignal::Instance().Name(), &bsp::HclkClockSignal::Instance());
             _dic.Add(bsp::Pclk1ClockSignal::Instance().Name(), &bsp::Pclk1ClockSignal::Instance());
             _dic.Add(bsp::Pclk2ClockSignal::Instance().Name(), &bsp::Pclk2ClockSignal::Instance());
