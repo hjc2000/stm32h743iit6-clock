@@ -37,7 +37,7 @@ base::Hz bsp::HclkClockSignal::Frequency() const
     return base::Hz{value};
 }
 
-void bsp::HclkClockSignal::Open(bsp::IClockSignal_InputDivisionFactor input_division_factor)
+void bsp::HclkClockSignal::Open(bsp::IClockSignal_InputDivisionFactor const &input_division_factor)
 {
     RCC_ClkInitTypeDef def{};
     def.ClockType = RCC_CLOCKTYPE_HCLK;
