@@ -55,6 +55,10 @@ void bsp::SysclkClockSignal::Open(bsp::IClockSignal_OutputDivisionFactor const &
     {
         def.SYSCLKSource = RCC_SYSCLKSOURCE_CSI;
     }
+    else if (clock_source.Value() == "pll")
+    {
+        def.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
+    }
     else
     {
         throw std::invalid_argument{"不支持此时钟源"};
