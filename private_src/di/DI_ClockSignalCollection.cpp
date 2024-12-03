@@ -1,5 +1,7 @@
 #include <base/container/Dictionary.h>
 #include <bsp-interface/di/clock.h>
+#include <D1Pclk1ClockSignal.h>
+#include <D3Pclk1ClockSignal.h>
 #include <HclkClockSignal.h>
 #include <Pclk1ClockSignal.h>
 #include <Pclk2ClockSignal.h>
@@ -16,6 +18,8 @@ namespace
             _dic.Add(bsp::HclkClockSignal::Instance().Name(), &bsp::HclkClockSignal::Instance());
             _dic.Add(bsp::Pclk1ClockSignal::Instance().Name(), &bsp::Pclk1ClockSignal::Instance());
             _dic.Add(bsp::Pclk2ClockSignal::Instance().Name(), &bsp::Pclk2ClockSignal::Instance());
+            _dic.Add(bsp::D1Pclk1ClockSignal::Instance().Name(), &bsp::D1Pclk1ClockSignal::Instance());
+            _dic.Add(bsp::D3Pclk1ClockSignal::Instance().Name(), &bsp::D3Pclk1ClockSignal::Instance());
         }
 
         base::Dictionary<std::string, bsp::IClockSignal *> _dic{};
