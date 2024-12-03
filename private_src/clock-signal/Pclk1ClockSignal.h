@@ -7,11 +7,11 @@
 
 namespace bsp
 {
-    class PclkClockSignal :
+    class Pclk1ClockSignal :
         public bsp::IClockSignal
     {
     public:
-        static_function PclkClockSignal &Instance();
+        static_function Pclk1ClockSignal &Instance();
 
         /// @brief 时钟信号的名称。
         /// @return

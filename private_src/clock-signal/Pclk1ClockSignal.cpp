@@ -1,14 +1,14 @@
-#include "PclkClockSignal.h"
+#include "Pclk1ClockSignal.h"
 
-bsp::PclkClockSignal &bsp::PclkClockSignal::Instance()
+bsp::Pclk1ClockSignal &bsp::Pclk1ClockSignal::Instance()
 {
     class Getter :
-        public base::SingletonGetter<PclkClockSignal>
+        public base::SingletonGetter<Pclk1ClockSignal>
     {
     public:
-        std::unique_ptr<PclkClockSignal> Create() override
+        std::unique_ptr<Pclk1ClockSignal> Create() override
         {
-            return std::unique_ptr<PclkClockSignal>{new PclkClockSignal{}};
+            return std::unique_ptr<Pclk1ClockSignal>{new Pclk1ClockSignal{}};
         }
 
         void Lock() override
@@ -26,12 +26,12 @@ bsp::PclkClockSignal &bsp::PclkClockSignal::Instance()
     return g.Instance();
 }
 
-std::string bsp::PclkClockSignal::Name() const
+std::string bsp::Pclk1ClockSignal::Name() const
 {
     return "pclk1";
 }
 
-base::Hz bsp::PclkClockSignal::Frequency() const
+base::Hz bsp::Pclk1ClockSignal::Frequency() const
 {
     uint32_t value = HAL_RCC_GetPCLK1Freq();
     return base::Hz{value};
