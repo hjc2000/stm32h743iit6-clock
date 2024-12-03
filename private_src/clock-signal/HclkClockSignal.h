@@ -20,5 +20,10 @@ namespace bsp
         /// @brief 时钟信号的频率
         /// @return
         virtual base::Hz Frequency() const override;
+
+        /// @brief 打开时钟信号。
+        /// @note 有的时钟信号只有输入分频，没有输出分频，就使用本重载。
+        /// @param input_division_factor
+        virtual void Open(bsp::IClockSignal_InputDivisionFactor input_division_factor) override;
     };
 } // namespace bsp
