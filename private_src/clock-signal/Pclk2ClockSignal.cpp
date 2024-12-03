@@ -46,27 +46,27 @@ void bsp::Pclk2ClockSignal::Open(bsp::IClockSignal_InputDivisionFactor const &in
     {
     case 1:
         {
-            def.APB1CLKDivider = RCC_APB2_DIV1;
+            def.APB2CLKDivider = RCC_APB2_DIV1;
             break;
         }
     case 2:
         {
-            def.APB1CLKDivider = RCC_APB2_DIV2;
+            def.APB2CLKDivider = RCC_APB2_DIV2;
             break;
         }
     case 4:
         {
-            def.APB1CLKDivider = RCC_APB2_DIV4;
+            def.APB2CLKDivider = RCC_APB2_DIV4;
             break;
         }
     case 8:
         {
-            def.APB1CLKDivider = RCC_APB2_DIV8;
+            def.APB2CLKDivider = RCC_APB2_DIV8;
             break;
         }
     case 16:
         {
-            def.APB1CLKDivider = RCC_APB2_DIV16;
+            def.APB2CLKDivider = RCC_APB2_DIV16;
             break;
         }
     default:
