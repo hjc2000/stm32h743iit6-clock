@@ -8,7 +8,7 @@
 namespace bsp
 {
     /// @brief hse 时钟源。需要外部晶振。
-    class HseClock :
+    class HseClockSource :
         public bsp::IClockSource
     {
     private:
@@ -16,7 +16,7 @@ namespace bsp
         IClockSource_State _state{};
 
     public:
-        static_function HseClock &Instance();
+        static_function HseClockSource &Instance();
 
 #pragma region IClockSource
         /// @brief 本时钟源的名称。

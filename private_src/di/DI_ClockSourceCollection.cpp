@@ -1,7 +1,7 @@
 #include <base/container/Dictionary.h>
 #include <bsp-interface/di/clock.h>
-#include <HseClock.h>
-#include <PllClock.h>
+#include <HseClockSource.h>
+#include <PllClockSource.h>
 
 namespace
 {
@@ -10,8 +10,8 @@ namespace
     public:
         Initializer()
         {
-            _dic.Add(bsp::HseClock::Instance().Name(), &bsp::HseClock::Instance());
-            _dic.Add(bsp::PllClock::Instance().Name(), &bsp::PllClock::Instance());
+            _dic.Add(bsp::HseClockSource::Instance().Name(), &bsp::HseClockSource::Instance());
+            _dic.Add(bsp::PllClockSource::Instance().Name(), &bsp::PllClockSource::Instance());
         }
 
         base::Dictionary<std::string, bsp::IClockSource *> _dic{};

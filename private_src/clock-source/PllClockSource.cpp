@@ -1,15 +1,15 @@
-#include "PllClock.h"
+#include "PllClockSource.h"
 #include <bsp-interface/di/clock.h>
 
-bsp::PllClock &bsp::PllClock::Instance()
+bsp::PllClockSource &bsp::PllClockSource::Instance()
 {
     class Getter :
-        public base::SingletonGetter<PllClock>
+        public base::SingletonGetter<PllClockSource>
     {
     public:
-        std::unique_ptr<PllClock> Create() override
+        std::unique_ptr<PllClockSource> Create() override
         {
-            return std::unique_ptr<PllClock>{new PllClock{}};
+            return std::unique_ptr<PllClockSource>{new PllClockSource{}};
         }
 
         void Lock() override
@@ -27,12 +27,12 @@ bsp::PllClock &bsp::PllClock::Instance()
     return g.Instance();
 }
 
-std::string bsp::PllClock::Name() const
+std::string bsp::PllClockSource::Name() const
 {
     return "pll";
 }
 
-void bsp::PllClock::Open(std::string const &input_channel_name, base::IDictionary<std::string, int> const &factors)
+void bsp::PllClockSource::Open(std::string const &input_channel_name, base::IDictionary<std::string, int> const &factors)
 {
 #pragma region m,n,p,q,r
     int m = 1;
@@ -174,7 +174,7 @@ void bsp::PllClock::Open(std::string const &input_channel_name, base::IDictionar
     _opened = true;
 }
 
-void bsp::PllClock::Close()
+void bsp::PllClockSource::Close()
 {
     RCC_OscInitTypeDef def{};
     def.OscillatorType = RCC_OSCILLATORTYPE_NONE;
@@ -188,12 +188,12 @@ void bsp::PllClock::Close()
     _opened = false;
 }
 
-bsp::IClockSource_State bsp::PllClock::State() const
+bsp::IClockSource_State bsp::PllClockSource::State() const
 {
     return _state;
 }
 
-base::Hz bsp::PllClock::Frequency(std::string const &output_channel_name) const
+base::Hz bsp::PllClockSource::Frequency(std::string const &output_channel_name) const
 {
     if (!_opened)
     {

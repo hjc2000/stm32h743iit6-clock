@@ -1,14 +1,14 @@
-#include "HseClock.h"
+#include "HseClockSource.h"
 
-bsp::HseClock &bsp::HseClock::Instance()
+bsp::HseClockSource &bsp::HseClockSource::Instance()
 {
     class Getter :
-        public base::SingletonGetter<HseClock>
+        public base::SingletonGetter<HseClockSource>
     {
     public:
-        std::unique_ptr<HseClock> Create() override
+        std::unique_ptr<HseClockSource> Create() override
         {
-            return std::unique_ptr<HseClock>{new HseClock{}};
+            return std::unique_ptr<HseClockSource>{new HseClockSource{}};
         }
 
         void Lock() override
@@ -26,12 +26,12 @@ bsp::HseClock &bsp::HseClock::Instance()
     return g.Instance();
 }
 
-std::string bsp::HseClock::Name() const
+std::string bsp::HseClockSource::Name() const
 {
     return "hse";
 }
 
-void bsp::HseClock::Open(base::Hz const &crystal_frequency)
+void bsp::HseClockSource::Open(base::Hz const &crystal_frequency)
 {
     RCC_OscInitTypeDef def{};
     def.OscillatorType = RCC_OSCILLATORTYPE_HSE;
@@ -46,7 +46,7 @@ void bsp::HseClock::Open(base::Hz const &crystal_frequency)
     _state = IClockSource_State::On;
 }
 
-void bsp::HseClock::SetAsBypass(base::Hz external_clock_frequency)
+void bsp::HseClockSource::SetAsBypass(base::Hz external_clock_frequency)
 {
     RCC_OscInitTypeDef def{};
     def.OscillatorType = RCC_OSCILLATORTYPE_HSE;
@@ -62,7 +62,7 @@ void bsp::HseClock::SetAsBypass(base::Hz external_clock_frequency)
     _state = IClockSource_State::Bypass;
 }
 
-void bsp::HseClock::Close()
+void bsp::HseClockSource::Close()
 {
     RCC_OscInitTypeDef def{};
     def.OscillatorType = RCC_OSCILLATORTYPE_HSE;
@@ -78,12 +78,12 @@ void bsp::HseClock::Close()
     _state = IClockSource_State::Off;
 }
 
-bsp::IClockSource_State bsp::HseClock::State() const
+bsp::IClockSource_State bsp::HseClockSource::State() const
 {
     return _state;
 }
 
-base::Hz bsp::HseClock::Frequency() const
+base::Hz bsp::HseClockSource::Frequency() const
 {
     return _frequency;
 }

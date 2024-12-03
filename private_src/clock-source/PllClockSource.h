@@ -7,7 +7,7 @@
 
 namespace bsp
 {
-    class PllClock :
+    class PllClockSource :
         public bsp::IClockSource
     {
     private:
@@ -18,7 +18,7 @@ namespace bsp
         base::Hz _r_freq;
 
     public:
-        static_function PllClock &Instance();
+        static_function PllClockSource &Instance();
 
         /// @brief 本时钟源的名称。
         /// @return
