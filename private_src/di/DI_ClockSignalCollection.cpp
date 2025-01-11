@@ -1,5 +1,6 @@
 #include <base/container/Dictionary.h>
 #include <bsp-interface/di/clock.h>
+#include <bsp-interface/di/task.h>
 #include <D1Pclk1ClockSignal.h>
 #include <D3Pclk1ClockSignal.h>
 #include <HclkClockSignal.h>
@@ -27,22 +28,12 @@ namespace
 
     /// @brief 单例获取器
     class Getter :
-        public base::SingletonGetter<Initializer>
+        public bsp::TaskSingletonGetter<Initializer>
     {
     public:
         std::unique_ptr<Initializer> Create() override
         {
             return std::unique_ptr<Initializer>{new Initializer{}};
-        }
-
-        void Lock() override
-        {
-            DI_DisableGlobalInterrupt();
-        }
-
-        void Unlock() override
-        {
-            DI_EnableGlobalInterrupt();
         }
     };
 } // namespace

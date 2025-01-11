@@ -1,24 +1,15 @@
 #include "Pclk2ClockSignal.h"
+#include <bsp-interface/di/task.h>
 
 bsp::Pclk2ClockSignal &bsp::Pclk2ClockSignal::Instance()
 {
     class Getter :
-        public base::SingletonGetter<Pclk2ClockSignal>
+        public bsp::TaskSingletonGetter<Pclk2ClockSignal>
     {
     public:
         std::unique_ptr<Pclk2ClockSignal> Create() override
         {
             return std::unique_ptr<Pclk2ClockSignal>{new Pclk2ClockSignal{}};
-        }
-
-        void Lock() override
-        {
-            DI_DisableGlobalInterrupt();
-        }
-
-        void Unlock() override
-        {
-            DI_EnableGlobalInterrupt();
         }
     };
 
