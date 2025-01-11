@@ -1,15 +1,24 @@
 #include "HclkClockSignal.h"
-#include <bsp-interface/di/task.h>
 
 bsp::HclkClockSignal &bsp::HclkClockSignal::Instance()
 {
     class Getter :
-        public bsp::TaskSingletonGetter<HclkClockSignal>
+        public base::SingletonGetter<HclkClockSignal>
     {
     public:
         std::unique_ptr<HclkClockSignal> Create() override
         {
             return std::unique_ptr<HclkClockSignal>{new HclkClockSignal{}};
+        }
+
+        void Lock() override
+        {
+            DI_DisableGlobalInterrupt();
+        }
+
+        void Unlock() override
+        {
+            DI_EnableGlobalInterrupt();
         }
     };
 

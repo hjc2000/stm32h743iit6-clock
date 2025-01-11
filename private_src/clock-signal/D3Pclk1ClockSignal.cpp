@@ -1,15 +1,24 @@
 #include "D3Pclk1ClockSignal.h"
-#include <bsp-interface/di/task.h>
 
 bsp::D3Pclk1ClockSignal &bsp::D3Pclk1ClockSignal::Instance()
 {
     class Getter :
-        public bsp::TaskSingletonGetter<D3Pclk1ClockSignal>
+        public base::SingletonGetter<D3Pclk1ClockSignal>
     {
     public:
         std::unique_ptr<D3Pclk1ClockSignal> Create() override
         {
             return std::unique_ptr<D3Pclk1ClockSignal>{new D3Pclk1ClockSignal{}};
+        }
+
+        void Lock() override
+        {
+            DI_DisableGlobalInterrupt();
+        }
+
+        void Unlock() override
+        {
+            DI_EnableGlobalInterrupt();
         }
     };
 
