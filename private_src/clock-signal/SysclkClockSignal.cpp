@@ -3,22 +3,12 @@
 bsp::SysclkClockSignal &bsp::SysclkClockSignal::Instance()
 {
     class Getter :
-        public base::SingletonGetter<SysclkClockSignal>
+        public bsp::TaskSingletonGetter<SysclkClockSignal>
     {
     public:
         std::unique_ptr<SysclkClockSignal> Create() override
         {
             return std::unique_ptr<SysclkClockSignal>{new SysclkClockSignal{}};
-        }
-
-        void Lock() override
-        {
-            DI_DisableGlobalInterrupt();
-        }
-
-        void Unlock() override
-        {
-            DI_EnableGlobalInterrupt();
         }
     };
 

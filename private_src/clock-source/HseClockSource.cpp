@@ -3,22 +3,12 @@
 bsp::HseClockSource &bsp::HseClockSource::Instance()
 {
     class Getter :
-        public base::SingletonGetter<HseClockSource>
+        public bsp::TaskSingletonGetter<HseClockSource>
     {
     public:
         std::unique_ptr<HseClockSource> Create() override
         {
             return std::unique_ptr<HseClockSource>{new HseClockSource{}};
-        }
-
-        void Lock() override
-        {
-            DI_DisableGlobalInterrupt();
-        }
-
-        void Unlock() override
-        {
-            DI_EnableGlobalInterrupt();
         }
     };
 

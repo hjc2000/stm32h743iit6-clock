@@ -3,22 +3,12 @@
 bsp::HclkClockSignal &bsp::HclkClockSignal::Instance()
 {
     class Getter :
-        public base::SingletonGetter<HclkClockSignal>
+        public bsp::TaskSingletonGetter<HclkClockSignal>
     {
     public:
         std::unique_ptr<HclkClockSignal> Create() override
         {
             return std::unique_ptr<HclkClockSignal>{new HclkClockSignal{}};
-        }
-
-        void Lock() override
-        {
-            DI_DisableGlobalInterrupt();
-        }
-
-        void Unlock() override
-        {
-            DI_EnableGlobalInterrupt();
         }
     };
 

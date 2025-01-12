@@ -4,22 +4,12 @@
 bsp::PllClockSource &bsp::PllClockSource::Instance()
 {
     class Getter :
-        public base::SingletonGetter<PllClockSource>
+        public bsp::TaskSingletonGetter<PllClockSource>
     {
     public:
         std::unique_ptr<PllClockSource> Create() override
         {
             return std::unique_ptr<PllClockSource>{new PllClockSource{}};
-        }
-
-        void Lock() override
-        {
-            DI_DisableGlobalInterrupt();
-        }
-
-        void Unlock() override
-        {
-            DI_EnableGlobalInterrupt();
         }
     };
 
