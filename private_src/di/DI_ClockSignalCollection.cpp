@@ -37,7 +37,7 @@ namespace
     };
 } // namespace
 
-base::IDictionary<std::string, bsp::IClockSignal *> const &DI_ClockSignalCollection()
+base::IDictionary<std::string, bsp::IClockSignal *> const &bsp::di::clock::ClockSignalCollection()
 {
     Getter g;
     return g.Instance()._dic;

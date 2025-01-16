@@ -102,7 +102,7 @@ void bsp::PllClockSource::Open(std::string const &input_channel_name,
     int pll_range = RCC_PLL1VCIRANGE_2;
     if (input_channel_name == "hse")
     {
-        input_freq = DI_ClockSourceCollection().Get("hse")->Frequency();
+        input_freq = bsp::di::clock::ClockSourceCollection().Get("hse")->Frequency();
         base::Fraction fraction_input_freq = static_cast<base::Fraction>(input_freq);
 
         /* 经过 m 分频系数分频后输入锁相环，这里需要根据输入锁相环的频率所处的范围来设置参数。
