@@ -28,7 +28,8 @@ namespace bsp
         /// @brief 用户自己决定输入通道和各个分频、倍频系数。
         /// @param input_channel_name 输入通道名。
         /// @param factor 分频、倍频系数都放在这个字典里，使用不同的名称来区分是什么。
-        void Open(std::string const &input_channel_name, base::IDictionary<std::string, int> const &factors) override;
+        void Open(std::string const &input_channel_name,
+                  base::IDictionary<std::string, int> const &factors) override;
 #pragma endregion
 
         /// @brief 关闭时钟源。

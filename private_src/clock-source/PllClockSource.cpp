@@ -22,7 +22,8 @@ std::string bsp::PllClockSource::Name() const
     return "pll";
 }
 
-void bsp::PllClockSource::Open(std::string const &input_channel_name, base::IDictionary<std::string, int> const &factors)
+void bsp::PllClockSource::Open(std::string const &input_channel_name,
+                               base::IDictionary<std::string, int> const &factors)
 {
 #pragma region m,n,p,q,r
     int m = 1;
