@@ -64,7 +64,7 @@ void bsp::HseClockSource::Close()
         throw std::runtime_error{"关闭 hse 时钟源失败。"};
     }
 
-    _frequency = 0;
+    _frequency = base::Hz{0};
     _state = IClockSource_State::Off;
 }
 
