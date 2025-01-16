@@ -1,4 +1,5 @@
 #include "SysclkClockSignal.h"
+#include <base/unit/Hz.h>
 
 bsp::SysclkClockSignal &bsp::SysclkClockSignal::Instance()
 {
@@ -21,10 +22,10 @@ std::string bsp::SysclkClockSignal::Name() const
     return "sysclk";
 }
 
-base::Hz bsp::SysclkClockSignal::Frequency() const
+base::MHz bsp::SysclkClockSignal::Frequency() const
 {
     uint32_t value = HAL_RCC_GetSysClockFreq();
-    return base::Hz{value};
+    return base::MHz{base::Hz{value}};
 }
 
 void bsp::SysclkClockSignal::Open(bsp::IClockSignal_OutputDivisionFactor const &output_division_factor,

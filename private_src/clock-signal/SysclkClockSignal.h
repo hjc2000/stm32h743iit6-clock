@@ -19,7 +19,7 @@ namespace bsp
 
         /// @brief 时钟信号的频率
         /// @return
-        virtual base::Hz Frequency() const override;
+        virtual base::MHz Frequency() const override;
 
         /// @brief 打开时钟信号。
         /// @param output_division_factor 输出分频系数。

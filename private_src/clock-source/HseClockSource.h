@@ -12,7 +12,7 @@ namespace bsp
         public bsp::IClockSource
     {
     private:
-        base::Hz _frequency{};
+        base::MHz _frequency{};
         IClockSource_State _state{};
 
     public:
@@ -27,11 +27,11 @@ namespace bsp
         /// @note 有的时钟源非常简单，外部振荡器输入后，直接就输出同频率的时钟信号，
         /// 不支持分频和倍频。本重载用于这种简单的时钟源。
         /// @param crystal_frequency
-        void Open(base::Hz const &crystal_frequency) override;
+        void Open(base::MHz const &crystal_frequency) override;
 
         /// @brief 设置为旁路。
         /// @param external_clock_frequency 外部时钟频率。
-        void SetAsBypass(base::Hz external_clock_frequency) override;
+        void SetAsBypass(base::MHz external_clock_frequency) override;
 
         /// @brief 关闭时钟源。
         void Close() override;
@@ -42,7 +42,7 @@ namespace bsp
 
         /// @brief 本时钟源当前频率。
         /// @return
-        base::Hz Frequency() const override;
+        base::MHz Frequency() const override;
 #pragma endregion
     };
 } // namespace bsp

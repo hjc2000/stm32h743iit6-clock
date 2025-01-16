@@ -1,4 +1,5 @@
 #include "HclkClockSignal.h"
+#include <base/unit/Hz.h>
 
 bsp::HclkClockSignal &bsp::HclkClockSignal::Instance()
 {
@@ -21,10 +22,10 @@ std::string bsp::HclkClockSignal::Name() const
     return "hclk";
 }
 
-base::Hz bsp::HclkClockSignal::Frequency() const
+base::MHz bsp::HclkClockSignal::Frequency() const
 {
     uint32_t value = HAL_RCC_GetHCLKFreq();
-    return base::Hz{value};
+    return base::MHz{base::Hz{value}};
 }
 
 void bsp::HclkClockSignal::Open(bsp::IClockSignal_InputDivisionFactor const &input_division_factor)

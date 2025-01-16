@@ -1,4 +1,5 @@
 #include "Pclk2ClockSignal.h"
+#include <base/unit/Hz.h>
 
 bsp::Pclk2ClockSignal &bsp::Pclk2ClockSignal::Instance()
 {
@@ -21,10 +22,10 @@ std::string bsp::Pclk2ClockSignal::Name() const
     return "pclk2";
 }
 
-base::Hz bsp::Pclk2ClockSignal::Frequency() const
+base::MHz bsp::Pclk2ClockSignal::Frequency() const
 {
     uint32_t value = HAL_RCC_GetPCLK2Freq();
-    return base::Hz{value};
+    return base::MHz{base::Hz{value}};
 }
 
 void bsp::Pclk2ClockSignal::Open(bsp::IClockSignal_InputDivisionFactor const &input_division_factor)

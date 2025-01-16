@@ -97,7 +97,7 @@ void bsp::PllClockSource::Open(std::string const &input_channel_name, base::IDic
 #pragma endregion
 
 #pragma region pll_range
-    base::Hz input_freq;
+    base::MHz input_freq;
     int pll_range = RCC_PLL1VCIRANGE_2;
     if (input_channel_name == "hse")
     {
@@ -183,7 +183,7 @@ bsp::IClockSource_State bsp::PllClockSource::State() const
     return _state;
 }
 
-base::Hz bsp::PllClockSource::Frequency(std::string const &output_channel_name) const
+base::MHz bsp::PllClockSource::Frequency(std::string const &output_channel_name) const
 {
     if (!_opened)
     {

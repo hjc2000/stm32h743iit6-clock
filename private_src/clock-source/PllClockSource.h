@@ -13,9 +13,9 @@ namespace bsp
     private:
         bool _opened = false;
         IClockSource_State _state = IClockSource_State::Off;
-        base::Hz _p_freq;
-        base::Hz _q_freq;
-        base::Hz _r_freq;
+        base::MHz _p_freq;
+        base::MHz _q_freq;
+        base::MHz _r_freq;
 
     public:
         static_function PllClockSource &Instance();
@@ -41,6 +41,6 @@ namespace bsp
         /// @brief 查看某一个输出通道的频率。有的时钟源会有多个输出通道。
         /// @param output_channel_name 输出通道名。
         /// @return
-        base::Hz Frequency(std::string const &output_channel_name) const override;
+        base::MHz Frequency(std::string const &output_channel_name) const override;
     };
 } // namespace bsp
